@@ -882,7 +882,7 @@ local function UI()
 					local humanoid = player.Character:FindFirstChild("Humanoid")
 					Amount.Text = humanoid.Health .."/".. humanoid.MaxHealth
 					Amount_1.Text = math.clamp(math.round(stamina), 0, 110) .."/110"
-					Bar.Clipping.Size = UDim2.fromScale(humanoid.Health / humanoid.MaxHealth, 1)
+					Bar.Clipping.Size = UDim2.fromScale(math.round(humanoid.Health) / humanoid.MaxHealth, 1)
 					Bar_1.Clipping.Size = UDim2.fromScale(math.clamp(math.round(stamina), 0, 110) / 110, 1)
 
 					Punch.CooldownTime.Text = mainabilitycooldown
@@ -1200,6 +1200,8 @@ player.CharacterAdded:Connect(function(char)
 	humanoid = character:WaitForChild("Humanoid")
 	humanoid.MaxHealth = 800
 	humanoid.Health = 800
+	humanoid.UseJumpPower = true
+	humanoid.JumpPower = 0
 	flinging = false
 	Clip = false
 	if noclipping then
@@ -1209,4 +1211,7 @@ player.CharacterAdded:Connect(function(char)
 end)
 humanoid.MaxHealth = 800
 humanoid.Health = 800
+humanoid.UseJumpPower = true
+humanoid.JumpPower = 0
 UI()
+
