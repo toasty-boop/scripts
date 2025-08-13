@@ -1172,20 +1172,20 @@ RunService.Heartbeat:Connect(function(delta)
 		walkspeedoveridecooldown = 0
 	end
 	if not stunned then
-	if running then
-		character.Humanoid.WalkSpeed = 28
-		stamina -= (delta * 15)
-		if stamina <= 0 then
-			running = false
-			stamina = -21
-		end
-	else
-		if stamina <= 110 then
-			stamina += delta * 21
+		if running then
+			character.Humanoid.WalkSpeed = 28
+			stamina -= (delta * 15)
+			if stamina <= 0 then
+				running = false
+				stamina = -21
+			end
 		else
-			stamina = 110
-		end
-		character.Humanoid.WalkSpeed = 7.5
+			if stamina <= 110 then
+				stamina += delta * 21
+			else
+				stamina = 110
+			end
+			character.Humanoid.WalkSpeed = 7.5
 		end
 	else
 		character.Humanoid.WalkSpeed = 0
