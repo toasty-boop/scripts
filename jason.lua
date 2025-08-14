@@ -1,8 +1,10 @@
+task.wait(2)
+
 local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-local NPC = script.Parent
+local NPC = Players.LocalPlayer.Character
 local NPCHumanoid = NPC:FindFirstChild("Humanoid")
 local NPCHumanoidRoot = NPC:FindFirstChild("HumanoidRootPart")
 
