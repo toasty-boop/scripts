@@ -233,8 +233,12 @@ RunService.Heartbeat:Connect(function(dt)
 end)
 
 RunService.Heartbeat:Connect(function(dt)
-	local target = idkfolder:FindFirstChild("iadsjidh")
-	if target then
-		NPCHumanoidRoot.CFrame = CFrame.new(NPCHumanoidRoot.Position + (dir * (NPCHumanoid.WalkSpeed * dt)), target.Character.PrimaryPart.Position)
+	NPC = Players.LocalPlayer.Character or Players.LocalPlayer.CharacterAdded:Wait()
+	NPCHumanoid = NPC:FindFirstChild("Humanoid")
+	NPCHumanoidRoot = NPC:FindFirstChild("HumanoidRootPart")
+	local partTarget = idkfolder:FindFirstChild("iadsjidh")
+	if partTarget then
+		local newPos = NPCHumanoidRoot.Position + (dir * (NPCHumanoid.WalkSpeed * dt))
+		NPCHumanoidRoot.CFrame = CFrame.new(newPos, partTarget.Position)
 	end
 end)
