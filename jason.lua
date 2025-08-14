@@ -89,6 +89,7 @@ end)
 local path = nil
 local waypoints = nil
 local RANGE = 50
+local waypoint = nil
 
 local function CreatePlayerPath(target)
 	local playerPath = PathfindingService:CreatePath({
@@ -144,34 +145,10 @@ RunService.Heartbeat:Connect(function(dt)
 		if dist > 50 then
 			running = true
 		else
-			if targetrunning and not running then
-				running = predictedstamina < (stamina / 1.2)
-			elseif not targetrunning and running then
-				if dist < 15 and math.random(1,20) > 1 then
-					running = true
-				else
-					running = false
-				end
-			elseif not targetrunning and not running then
-				if math.random(1,30) == 1 then
-					running = true
-				end
-			elseif targetrunning and running then
-				if stamina < 40 then
-					waiting = true
-					running = false
-				else
-					running = true
-				end
-			end
-			if math.random(1,20) == 1 then
-				local idk = 0
-				repeat
-					running = true
-					idk += 1
-					task.wait()
-				until idk > 70
+			if stamina < 20 then
 				running = false
+			elseif stamina > 40 then
+				running = true
 			end
 
 			if dist < 5 then
@@ -215,6 +192,7 @@ RunService.Heartbeat:Connect(function(dt)
 			part.Position = waypoints[2].Position
 			part.Parent = workspace.idk
 			part.Name = "iadsjidh"
+			waypoint = part
 
 			dir = (waypoints[2].Position - NPCHumanoidRoot.Position).Unit
 			if stamina < 10 then
@@ -244,12 +222,12 @@ RunService.Heartbeat:Connect(function(dt)
 		if ragingpace then
 			speed = 19.5
 		else
-			speed = 26
+			speed = 28
 		end
 	end
 
 	if moveTarget then
-		local dir = (moveTarget - NPCHumanoidRoot.Position)
+		local dir = (moveTarget + Vector3.new(0,NPCHumanoid.HipHeight,0) - NPCHumanoidRoot.Position)
 		local dist = dir.Magnitude
 
 		if dist > 0.1 then
