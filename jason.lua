@@ -49,7 +49,6 @@ local function getClosestPlayer()
 end
 
 RunService.Heartbeat:Connect(function(delta)
-	print(stamina)
 	if mainAbilityCooldown > 0 then
 		mainAbilityCooldown -= delta
 	else
@@ -255,10 +254,9 @@ RunService.Heartbeat:Connect(function(dt)
 
 		if dist > 0.1 then
 			local step = math.min(dist, speed * dt)
-			NPCHumanoidRoot.CFrame = CFrame.new(
-				NPCHumanoidRoot.Position + dir.Unit * step,
-				moveTarget
-			)
+			NPCHumanoidRoot.CFrame = NPCHumanoidRoot.CFrame + dir.Unit * step
+			print("movingg")
+			
 		else
 			moveTarget = nil -- reached target
 		end
