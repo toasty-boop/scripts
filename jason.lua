@@ -16,6 +16,9 @@ local ragingpaceCooldown = 0
 local stamina = 110
 local running = false
 local ragingpace = false
+local idkfolder = Instance.new("Folder")
+idkfolder.Parent = workspace
+idkfolder.Name = "idk"
 
 local lastdist = math.huge
 
