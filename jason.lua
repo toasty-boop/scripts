@@ -4,9 +4,11 @@ local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-local NPC = Players.LocalPlayer.Character
+local NPC = Players.LocalPlayer.Character or Players.LocalPlayer.CharacterAdded:Wait()
 local NPCHumanoid = NPC:FindFirstChild("Humanoid")
 local NPCHumanoidRoot = NPC:FindFirstChild("HumanoidRootPart")
+
+print(NPCHumanoid, NPCHumanoidRoot)
 
 local mainAbilityCooldown = 0
 local ragingpaceCooldown = 0
@@ -175,8 +177,14 @@ RunService.Heartbeat:Connect(function(dt)
 					if abilitycontainer then
 						if abilitycontainer:FindFirstChild("Slash") then
 							abilitycontainer.Slash:Activate()
+						else
+							print("no slash")
 						end
+					else
+						print("no ability container")
 					end
+				else
+					print("no mainui")
 				end
 			end
 		end
