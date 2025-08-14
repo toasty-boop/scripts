@@ -232,8 +232,13 @@ RunService.Heartbeat:Connect(function(dt)
 end)
 
 local dt = tick()
-while task.wait(0.1) do
+local lastTick = tick()
+while task.wait() do
+	local now = tick()
+	local delta = now - lastTick
 	local target = getClosestPlayer()
-	dt = dt - tick()
-	NPCHumanoidRoot.CFrame = CFrame.new(NPCHumanoidRoot.Position + (dir * (NPCHumanoid.WalkSpeed * dt)), target.Character.PrimaryPart.Position)
+	lastTick = now
+	if target then
+		NPCHumanoidRoot.CFrame = CFrame.new(NPCHumanoidRoot.Position + (dir * (NPCHumanoid.WalkSpeed * dt)), target.Character.PrimaryPart.Position)
+	end
 end
