@@ -247,21 +247,26 @@ RunService.Heartbeat:Connect(function(dt)
 			speed = 26
 		end
 	end
-	
+
 	if moveTarget then
-		local dir = (Vector3.new(moveTarget.X, 0, moveTarget.Z) - Vector3.new(NPCHumanoidRoot.Position.X, 0, NPCHumanoidRoot.Position.Z))
+		local dir = (moveTarget - NPCHumanoidRoot.Position)
 		local dist = dir.Magnitude
 
 		if dist > 0.1 then
 			local step = math.min(dist, speed * dt)
-			NPCHumanoidRoot.CFrame = (NPCHumanoidRoot.CFrame + dir.Unit * step)
+			local newPos = NPCHumanoidRoot.Position + dir.Unit * step
+
+			-- Only rotate on Y-axis
+			local lookPos = Vector3.new(moveTarget.X, newPos.Y, moveTarget.Z)
+			NPCHumanoidRoot.CFrame = CFrame.lookAt(newPos, lookPos)
+
 			print("movingg")
-			
 		else
 			moveTarget = nil -- reached target
 		end
 	end
 end)
+
 
 -- example usage
 while task.wait() do
