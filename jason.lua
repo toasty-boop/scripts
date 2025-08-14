@@ -23,6 +23,8 @@ local function getClosestPlayer()
 	local magnitudes = {}
 	local target = nil
 	local distance = nil
+	
+	--table.insert(magnitudes, {game.Players.LocalPlayer:DistanceFromCharacter(workspace.Rig.HumanoidRootPart.Position),game.Players.LocalPlayer})
 
 	for _,player in pairs(Players:GetPlayers()) do
 		if player ~= game.Players.LocalPlayer then
