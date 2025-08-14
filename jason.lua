@@ -217,8 +217,8 @@ local function setMoveTarget(pos)
 end
 -- movement loop
 RunService.Heartbeat:Connect(function(dt)
-	local NPCHumanoidRoot = NPC:FindFirstChild("HumanoidRootPart")
-	local NPCHumanoid = NPC:FindFirstChild("Humanoid")
+	NPCHumanoidRoot = NPC:FindFirstChild("HumanoidRootPart")
+	NPCHumanoid = NPC:FindFirstChild("Humanoid")
 	
 	if not NPCHumanoidRoot or not NPCHumanoid then return end
 	local speed = 12
