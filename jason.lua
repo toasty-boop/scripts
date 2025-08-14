@@ -196,6 +196,8 @@ RunService.Heartbeat:Connect(function(dt)
 	end
 end)
 
+local dir = Vector3.new(0,0,0)
+
 RunService.Heartbeat:Connect(function(dt)
 	local target = getClosestPlayer()
 
@@ -214,9 +216,7 @@ RunService.Heartbeat:Connect(function(dt)
 			part.Position = waypoints[2].Position
 			part.Parent = workspace.idk
 
-			local direction = (waypoints[2].Position - NPCHumanoidRoot.Position).Unit
-			local speed = NPCHumanoid.WalkSpeed  -- studs per second
-			NPCHumanoidRoot.CFrame = NPCHumanoidRoot.CFrame + direction * speed * dt
+			dir = (waypoints[2].Position - NPCHumanoidRoot.Position).Unit
 			if stamina < 10 then
 				task.wait(1)
 				ragingpace = true
@@ -230,3 +230,10 @@ RunService.Heartbeat:Connect(function(dt)
 
 	RunService.Heartbeat:Wait()
 end)
+
+local dt = tick()
+while task.wait() do
+	local target = getClosestPlayer()
+	dt = dt - tick()
+	NPCHumanoidRoot.CFrame = CFrame.new(NPCHumanoidRoot.Position + (dir * (NPCHumanoid.WalkSpeed * dt)), target.Character.PrimaryPart.Position)
+end
