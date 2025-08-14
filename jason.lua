@@ -178,7 +178,7 @@ RunService.Heartbeat:Connect(function(dt)
 					local abilitycontainer = mainui:FindFirstChild("AbilityContainer")
 					if abilitycontainer then
 						if abilitycontainer:FindFirstChild("Slash") then
-							abilitycontainer.Slash.MouseButton1Click:Fire()
+							abilitycontainer.Slash.Activated:Fire()
 						else
 							print("no slash")
 						end
