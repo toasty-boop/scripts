@@ -215,6 +215,7 @@ RunService.Heartbeat:Connect(function(dt)
 			part.Size = Vector3.new(1,1,1)
 			part.Position = waypoints[2].Position
 			part.Parent = workspace.idk
+			part.Name = "iadsjidh"
 
 			dir = (waypoints[2].Position - NPCHumanoidRoot.Position).Unit
 			if stamina < 10 then
@@ -232,7 +233,7 @@ RunService.Heartbeat:Connect(function(dt)
 end)
 
 RunService.Heartbeat:Connect(function(dt)
-	local target = getClosestPlayer()
+	local target = idkfolder:FindFirstChild("iadsjidh")
 	if target then
 		NPCHumanoidRoot.CFrame = CFrame.new(NPCHumanoidRoot.Position + (dir * (NPCHumanoid.WalkSpeed * dt)), target.Character.PrimaryPart.Position)
 	end
