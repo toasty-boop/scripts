@@ -178,7 +178,7 @@ RunService.Heartbeat:Connect(function(dt)
 					local abilitycontainer = mainui:FindFirstChild("AbilityContainer")
 					if abilitycontainer then
 						if abilitycontainer:FindFirstChild("Slash") then
-							abilitycontainer.Slash:Activate()
+							abilitycontainer.Slash.MouseButton1Click:Fire()
 						else
 							print("no slash")
 						end
@@ -193,7 +193,7 @@ RunService.Heartbeat:Connect(function(dt)
 	end
 end)
 
-while true do
+RunService.Heartbeat:Connect(function(dt)
 	local target = getClosestPlayer()
 
 	if target then
@@ -211,7 +211,9 @@ while true do
 			part.Position = waypoints[2].Position
 			part.Parent = workspace.idk
 
-			NPCHumanoid:MoveTo(waypoints[2].Position)
+			local direction = (waypoints[2].Position - NPCHumanoidRoot.Position).Unit
+			local speed = NPCHumanoid.WalkSpeed  -- studs per second
+			NPCHumanoidRoot.CFrame = NPCHumanoidRoot.CFrame + direction * speed * dt
 			if stamina < 10 then
 				task.wait(1)
 				ragingpace = true
@@ -224,4 +226,4 @@ while true do
 	end
 
 	RunService.Heartbeat:Wait()
-end
+end)
