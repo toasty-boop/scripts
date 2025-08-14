@@ -232,13 +232,43 @@ RunService.Heartbeat:Connect(function(dt)
 	RunService.Heartbeat:Wait()
 end)
 
+local moveTarget -- where we want to move
+
+-- set the move target (like MoveTo)
+local function setMoveTarget(pos)
+	moveTarget = pos
+end
+-- movement loop
 RunService.Heartbeat:Connect(function(dt)
-	NPC = Players.LocalPlayer.Character or Players.LocalPlayer.CharacterAdded:Wait()
-	NPCHumanoid = NPC:FindFirstChild("Humanoid")
-	NPCHumanoidRoot = NPC:FindFirstChild("HumanoidRootPart")
-	local partTarget = idkfolder:FindFirstChild("iadsjidh")
-	if partTarget then
-		local newPos = NPCHumanoidRoot.Position + (dir * (NPCHumanoid.WalkSpeed * dt))
-		NPCHumanoidRoot.CFrame = CFrame.new(newPos, partTarget.Position)
+	local speed = 12
+	if running then
+		if ragingpace then
+			speed = 19.5
+		else
+			speed = 26
+		end
+	end
+	
+	if moveTarget then
+		local dir = (moveTarget - NPCHumanoidRoot.Position)
+		local dist = dir.Magnitude
+
+		if dist > 0.1 then
+			local step = math.min(dist, speed * dt)
+			NPCHumanoidRoot.CFrame = CFrame.new(
+				NPCHumanoidRoot.Position + dir.Unit * step,
+				moveTarget
+			)
+		else
+			moveTarget = nil -- reached target
+		end
 	end
 end)
+
+-- example usage
+while task.wait() do
+	local waypoint = idkfolder:FindFirstChild("iadsjidh")
+	if waypoint then
+		setMoveTarget(waypoint.Position)
+	end
+end
