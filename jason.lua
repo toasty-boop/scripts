@@ -217,6 +217,10 @@ local function setMoveTarget(pos)
 end
 -- movement loop
 RunService.Heartbeat:Connect(function(dt)
+	local NPCHumanoidRoot = NPC:FindFirstChild("HumanoidRootPart")
+	local NPCHumanoid = NPC:FindFirstChild("Humanoid")
+	
+	if not NPCHumanoidRoot or not NPCHumanoid then return end
 	local speed = 12
 	if running then
 		if ragingpace then
@@ -229,6 +233,7 @@ RunService.Heartbeat:Connect(function(dt)
 	if moveTarget then
 		local dir = (moveTarget + Vector3.new(0,NPCHumanoid.HipHeight,0) - NPCHumanoidRoot.Position)
 		local dist = dir.Magnitude
+		if dist > 10 then return end
 
 		if dist > 0.1 then
 			local step = math.min(dist, speed * dt)
