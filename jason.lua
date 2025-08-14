@@ -249,12 +249,12 @@ RunService.Heartbeat:Connect(function(dt)
 	end
 	
 	if moveTarget then
-		local dir = (moveTarget - NPCHumanoidRoot.Position)
+		local dir = (Vector3.new(moveTarget.X, 0, moveTarget.Z) - Vector3.new(NPCHumanoidRoot.Position.X, 0, NPCHumanoidRoot.Position.Z))
 		local dist = dir.Magnitude
 
 		if dist > 0.1 then
 			local step = math.min(dist, speed * dt)
-			NPCHumanoidRoot.CFrame = NPCHumanoidRoot.CFrame + dir.Unit * step * CFrame.new(Vector3.new(1,1,1), Vector3.new(0,1,0))
+			NPCHumanoidRoot.CFrame = (NPCHumanoidRoot.CFrame + dir.Unit * step)
 			print("movingg")
 			
 		else
